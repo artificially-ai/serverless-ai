@@ -1,0 +1,13 @@
+apiVersion: "nuclio.io/v1"
+kind: NuclioFunction
+spec:
+  image: sentiment-analysis
+  runtime: python
+  handler: sentiment:classify
+  targetCPU: 80
+  minReplicas: 1
+  maxReplicas: 2
+  build:
+    commands:
+      - pip install nltk tensorflow numpy sklearn pandas
+      - python -c "import nltk; nltk.download('punkt')"

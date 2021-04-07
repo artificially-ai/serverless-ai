@@ -1,0 +1,6 @@
+apiVersion: "nuclio.io/v1"
+kind: NuclioFunction
+spec:
+  targetCPU: 80
+  minReplicas: 1
+  maxReplicas: 2
