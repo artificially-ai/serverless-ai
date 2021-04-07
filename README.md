@@ -79,7 +79,7 @@ The command above is doing the following:
 
 If you now go to your [http://localhost:8070](http://localhost:8070), you will be able to see the project we just created. 
 
-## Build the Docker Image
+## Building the Docker image
 
 Well, we are building Docker based Nuclio functions. It's not a hard requirement, as you can just have your sample code
 deployed directly. However, I appreciate the isolation created by Docker containers.
@@ -90,7 +90,7 @@ From the root of the repository, please run the command below:
 docker build -f samples/nuclio-sample/docker/nuclio-function.dockerfile -t nuclio-function samples/nuclio-sample/.
 ```
 
-## Deploying the Function
+## Deploying the sample function
 
 So, the Docker image has been created. Now what? Now it's time to deploy our sample function. Yeah, we are doing this!
 
@@ -131,7 +131,7 @@ nuctl get functions nuclio-function --platform local
 
 The `node port` means through which port you can access your service. 
 
-## Invoking the Function
+## Invoking the sample function
 
 Want to give it a try? You can have a look at one of the following ways to do so:
 
@@ -175,20 +175,20 @@ The `hdf5` model file should go under `sentiment-sample/application/model`.
 
 After the part is done, you know the drill. 
 
-## Create Project
+## Creating the serverless-ai project
 
 ```shell script
 nuctl create project serverless-ai --platform local
 ```
 
-## Build the Docker Image
+## Building the Docker image
 
 ```shell script
 docker build -f samples/sentiment-sample/docker/sentiment.dockerfile \
 -t sentiment-analysis samples/sentiment-sample/.
 ```
 
-# Deploy Function
+# Deploying the Deep Learning function
 
 ```shell script
 nuctl deploy sentiment-analysis \
@@ -213,9 +213,19 @@ So, most of the parameters are related to what we have seen before. However, we 
 3. `--file` but no `--runtime`
 - We inform the path to the YAML file, which already has the runtime configuration, instead of informing the runtime.
 
-## Invoke Function Using PostMan
+## Invoking function using PostMan
 
 So, the function handler will expect any parameter to be in the body of the request. A good and simple way to try
 this service out is by invoking the function using PostMan. Have a look at the screenshot below:
 
 ![Postman Request](samples/images/postman.png)
+
+# Acknowledgements
+
+Thanks to you all for spending some time reading through - if you made that far - and for trying it out - I hope you did.
+
+Nuclio is very powerful, works well and has a strong community behind it.
+
+As a remark: I do not work for them and I'm not here to advertise anything: I simply tried and loved it. :)
+
+Have fun and see you around.
