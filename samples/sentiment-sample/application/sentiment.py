@@ -9,6 +9,13 @@ from tensorflow.keras.models import load_model
 import json
 
 
+def init_context(context):
+    context.logger.info('Initialising context...')
+    model = load_model('/opt/nuclio/model/imdb-deep-net.hdf5')
+    setattr(context.user_data, 'dl_model', model)
+    context.logger.info('Deep Learning Model loaded and stored in the User Data context.')
+
+
 def classify(context, event):
     message_body = event.body.decode('utf-8')
     context.logger.info(f"Message body extracted: '{message_body}'")
@@ -32,7 +39,7 @@ def classify(context, event):
     review_index = pad_sequences(review_index, maxlen=max_review_length, padding=pad_type, truncating=trunc_type,
                                  value=0)
 
-    model = load_model('/opt/nuclio/model/imdb-deep-net.hdf5')
+    model = context.user_data.dl_model
     prediction = model.predict_proba(review_index).ravel()
     result = {'review': message_body, 'sentiment': f'{(prediction[0] * 100):.2f}% positive.'}
 
